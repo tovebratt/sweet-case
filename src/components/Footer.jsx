@@ -4,8 +4,8 @@ const Footer = () => {
   <nav>
     <ul>
       <li>Support</li>
-      <li>xxx</li>
-      <li>xxx</li>
+      <li>Knowledge base</li>
+      <li>Contact us</li>
     </ul>
   </nav>
   );

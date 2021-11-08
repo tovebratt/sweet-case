@@ -1,11 +1,14 @@
 import ApplicationsForm from './ApplicationsForm';
 import { store2 } from '../store';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 console.log(store2);
 console.log(store2.getState())
 
 const ApplicationsList = () => {
+
+  const [popupForm, setPopupForm] = useState(false);
 
   const applications = useSelector(state => state.applications)
   console.log(applications);
@@ -21,20 +24,25 @@ const ApplicationsList = () => {
       </thead>
       <tbody>
         {applications.map((application) => {     
-          return <tr><td>{application.applicationName}</td><td>{application.date}</td><td>{application.createdBy}</td><td className="url">{application.URL}</td></tr>
+          return <tr key={application.id}><td >{application.applicationName}</td><td>{application.date}</td><td>{application.createdBy}</td><td className="url">{application.URL}</td></tr>
         })}      
       </tbody>
     </table>
   )
 
+  const onClick = () => {
+    //showPopup
+    setPopupForm(true);
+  }
+
   return (
   <>
-  <button className="btn-primary">Create new application</button>
+  <button className="btn-primary" onClick={onClick}>Create new application</button>
   <section>
     {renderedApplications}
   </section>
     
-    <ApplicationsForm />
+    {popupForm && (<ApplicationsForm onCloseClick={() => setPopupForm(!popupForm)}/>)}
     
   </>
   );
